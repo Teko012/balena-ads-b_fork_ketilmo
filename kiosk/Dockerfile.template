@@ -1,3 +1,5 @@
-FROM bh.cr/balenalabs/browser-%%BALENA_ARCH%%/2.7.0
+# renovate: datasource=github-tags depName=balena-io-experimental/browser versioning=loose
+ARG BROWSER_VERSION=2.6.0
+FROM bh.cr/balenalabs/browser-%%BALENA_ARCH%%/$BROWSER_VERSION AS base
 
 RUN install_packages cec-utils

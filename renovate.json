@@ -2,5 +2,42 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "prHourlyLimit": 0,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)Dockerfile$",
+        "(^|/)Dockerfile\\.[^/]*$"
+      ],
+      "matchStrings": [
+        "renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(ARG|ENV) .*?_VERSION=(?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
+      "matchStrings": ["READSB_COMMIT=(?<currentDigest>.*?)\\n"],
+      "currentValueTemplate": "master",
+      "depNameTemplate": "readsb",
+      "packageNameTemplate": "https://github.com/adsb-related-code/readsb",
+      "datasourceTemplate": "git-refs"
+    }
+  ],
+  "customDatasources": {
+    "flightradar24": {
+      "defaultRegistryUrlTemplate": "https://s3.dualstack.us-east-1.amazonaws.com/repo.feed.flightradar24.com/fr24feed_versions.json",
+      "transformTemplates": [
+        "{\"releases\":[{\"version\": $.platform.linux_arm64_tgz.version}]}"
+      ]
+    }
+  },
+  "logLevelRemap": [
+    {
+      "matchMessage": "/^Custom manager fetcher/",
+      "newLogLevel": "info"
+    }
   ]
 }

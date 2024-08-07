@@ -20,7 +20,7 @@ RUN apt update && \
 FROM base AS buildstep
 
 # renovate: datasource=github-tags depName=adsb-related-code/mlat-client versioning=loose
-ARG MLAT_VERSION=v0.3.9
+ARG MLAT_VERSION=v0.4.2
 ARG TEMP_INSTALL="build-essential debhelper python3-dev git" 
 
 RUN apt update && \

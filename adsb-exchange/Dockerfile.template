@@ -24,7 +24,7 @@ FROM base AS buildstep
 # renovate: datasource=git-refs depName=github.com/adsb-related-code/readsb versioning=loose
 ARG READSB_COMMIT=df470944179f4737d2d8e8027c11b40621db1eb7
 # renovate: datasource=github-tags depName=adsb-related-code/mlat-client versioning=loose
-ARG MLAT_VERSION=v0.3.9
+ARG MLAT_VERSION=v0.4.2
 ARG TEMP_INSTALL="git build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
 
 WORKDIR /tmp
